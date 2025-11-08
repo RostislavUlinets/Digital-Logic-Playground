@@ -114,12 +114,15 @@ void main() {
       // Extract input combinations
       final combinations = result.map((row) => [row['A'], row['B']]).toList();
 
-      expect(combinations, containsAll([
-        [false, false],
-        [false, true],
-        [true, false],
-        [true, true],
-      ]));
+      expect(
+        combinations,
+        containsAll([
+          [false, false],
+          [false, true],
+          [true, false],
+          [true, true],
+        ]),
+      );
     });
   });
 }
