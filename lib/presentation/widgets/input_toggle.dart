@@ -25,9 +25,9 @@ class InputToggle extends StatelessWidget {
       children: [
         Text(
           label,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Colors.white,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(color: Colors.white),
         ),
         const SizedBox(height: 8),
         Switch(
@@ -39,10 +39,7 @@ class InputToggle extends StatelessWidget {
         AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
           transitionBuilder: (Widget child, Animation<double> animation) {
-            return ScaleTransition(
-              scale: animation,
-              child: child,
-            );
+            return ScaleTransition(scale: animation, child: child);
           },
           child: Text(
             value ? '1' : '0',
