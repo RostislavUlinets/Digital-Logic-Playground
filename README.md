@@ -2,9 +2,9 @@
 
 A beautiful, interactive Flutter app for learning and experimenting with digital logic gates. Features smooth animations, a minimalistic design, and real-time circuit simulation.
 
-## Screenshot
+## Demo
 
-![App Preview](screenshots/app-preview.png)
+![App Demo](screenshots/app-demo.gif)
 
 ## Features
 
@@ -36,17 +36,20 @@ A beautiful, interactive Flutter app for learning and experimenting with digital
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/RostislavUlinets/Digital-Logic-Playground.git
 cd digital_logic_playground
 ```
 
 2. Install dependencies:
+
 ```bash
 flutter pub get
 ```
 
 3. Run the app:
+
 ```bash
 flutter run
 ```
@@ -84,6 +87,7 @@ This project is open source and available under the MIT License.
 ## Author
 
 **Rostislav Ulinets**
+
 - GitHub: [@RostislavUlinets](https://github.com/RostislavUlinets)
 
 ---
