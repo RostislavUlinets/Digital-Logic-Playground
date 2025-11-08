@@ -68,7 +68,6 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
 
                   // Table rows
                   ...widget.truthTable.asMap().entries.map((entry) {
-                    final index = entry.key;
                     final row = entry.value;
                     final isCurrentCombination =
                         row['A'] == widget.inputA && row['B'] == widget.inputB;
@@ -81,12 +80,14 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
                         curve: Curves.easeInOut,
                         decoration: BoxDecoration(
                           color: isCurrentCombination
-                              ? AppTheme.primaryColor.withOpacity(0.12)
+                              ? AppTheme.primaryColor.withValues(alpha: 0.12)
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(8),
                           border: isCurrentCombination
                               ? Border.all(
-                                  color: AppTheme.primaryColor.withOpacity(0.4),
+                                  color: AppTheme.primaryColor.withValues(
+                                    alpha: 0.4,
+                                  ),
                                   width: 1.5,
                                 )
                               : null,

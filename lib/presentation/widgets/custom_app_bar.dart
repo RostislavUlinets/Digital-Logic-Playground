@@ -14,7 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         color: AppTheme.surfaceColor,
         boxShadow: [
           BoxShadow(
-            color: AppTheme.primaryColor.withOpacity(0.1),
+            color: AppTheme.primaryColor.withValues(alpha: 0.1),
             blurRadius: 12,
             offset: const Offset(0, 2),
           ),
@@ -38,7 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.primaryColor.withOpacity(0.4),
+                      color: AppTheme.primaryColor.withValues(alpha: 0.4),
                       blurRadius: 12,
                       spreadRadius: 0,
                     ),
@@ -86,7 +86,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   color: AppTheme.surfaceVariant,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: AppTheme.primaryColor.withOpacity(0.2),
+                    color: AppTheme.primaryColor.withValues(alpha: 0.2),
                     width: 1,
                   ),
                 ),
@@ -105,7 +105,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   color: AppTheme.surfaceVariant,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: AppTheme.primaryColor.withOpacity(0.2),
+                    color: AppTheme.primaryColor.withValues(alpha: 0.2),
                     width: 1,
                   ),
                 ),

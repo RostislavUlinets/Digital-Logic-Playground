@@ -16,7 +16,7 @@ class OutputIndicator extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: value
-              ? AppTheme.neonCyan.withOpacity(0.5)
+              ? AppTheme.neonCyan.withValues(alpha: 0.5)
               : AppTheme.surfaceVariant,
           width: 2,
         ),
@@ -42,19 +42,13 @@ class OutputIndicator extends StatelessWidget {
               shape: BoxShape.circle,
               gradient: RadialGradient(
                 colors: value
-                    ? [
-                        AppTheme.neonCyan,
-                        AppTheme.primaryColor,
-                      ]
-                    : [
-                        AppTheme.outputOffColor,
-                        AppTheme.outputOffColor,
-                      ],
+                    ? [AppTheme.neonCyan, AppTheme.primaryColor]
+                    : [AppTheme.outputOffColor, AppTheme.outputOffColor],
               ),
               border: Border.all(
                 color: value
-                    ? AppTheme.neonCyan.withOpacity(0.8)
-                    : AppTheme.textSecondary.withOpacity(0.3),
+                    ? AppTheme.neonCyan.withValues(alpha: 0.8)
+                    : AppTheme.textSecondary.withValues(alpha: 0.3),
                 width: 2,
               ),
             ),
@@ -63,7 +57,9 @@ class OutputIndicator extends StatelessWidget {
               curve: Curves.easeInOut,
               style: TextStyle(
                 fontSize: 36,
-                color: value ? AppTheme.backgroundColor : AppTheme.textSecondary,
+                color: value
+                    ? AppTheme.backgroundColor
+                    : AppTheme.textSecondary,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0.5,
               ),

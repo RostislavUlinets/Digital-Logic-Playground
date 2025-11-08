@@ -28,7 +28,7 @@ class InputToggle extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: value
-              ? AppTheme.primaryColor.withOpacity(0.5)
+              ? AppTheme.primaryColor.withValues(alpha: 0.5)
               : AppTheme.surfaceVariant,
           width: 2,
         ),
@@ -56,14 +56,8 @@ class InputToggle extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: value
-                      ? [
-                          AppTheme.primaryColor,
-                          AppTheme.neonCyan,
-                        ]
-                      : [
-                          AppTheme.inputOffColor,
-                          AppTheme.inputOffColor,
-                        ],
+                      ? [AppTheme.primaryColor, AppTheme.neonCyan]
+                      : [AppTheme.inputOffColor, AppTheme.inputOffColor],
                 ),
                 borderRadius: BorderRadius.circular(16),
               ),
@@ -76,11 +70,13 @@ class InputToggle extends StatelessWidget {
                   height: 24,
                   margin: const EdgeInsets.symmetric(horizontal: 4),
                   decoration: BoxDecoration(
-                    color: value ? AppTheme.backgroundColor : AppTheme.textSecondary,
+                    color: value
+                        ? AppTheme.backgroundColor
+                        : AppTheme.textSecondary,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
+                        color: Colors.black.withValues(alpha: 0.2),
                         blurRadius: 4,
                       ),
                     ],

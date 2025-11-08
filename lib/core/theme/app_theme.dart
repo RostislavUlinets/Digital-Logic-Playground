@@ -7,7 +7,9 @@ class AppTheme {
   // Base colors
   static const Color backgroundColor = Color(0xFF0D1117); // Ultra-dark navy
   static const Color surfaceColor = Color(0xFF1A1A1E); // Charcoal gray
-  static const Color surfaceVariant = Color(0xFF1E1E25); // Subtle surface variation
+  static const Color surfaceVariant = Color(
+    0xFF1E1E25,
+  ); // Subtle surface variation
 
   // Accent colors
   static const Color primaryColor = Color(0xFF00C6AE); // Vivid teal/cyan
@@ -30,7 +32,9 @@ class AppTheme {
   static const Color outputOnColor = Color(0xFF00FFFF); // Cyan glow
 
   // Interactive elements
-  static const Color glassBackground = Color(0x1AFFFFFF); // Glass-like blur effect
+  static const Color glassBackground = Color(
+    0x1AFFFFFF,
+  ); // Glass-like blur effect
   static const Color buttonActive = primaryColor;
   static const Color buttonInactive = Color(0xFF2A2A32);
 
@@ -50,7 +54,6 @@ class AppTheme {
       ),
       scaffoldBackgroundColor: backgroundColor,
       fontFamily: 'SF Pro Text', // Rounded sans-serif for futuristic feel
-
       // AppBar theme
       appBarTheme: AppBarTheme(
         backgroundColor: surfaceColor,
@@ -71,7 +74,7 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16)),
           side: BorderSide(
-            color: primaryColor.withOpacity(0.1),
+            color: primaryColor.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
@@ -97,7 +100,7 @@ class AppTheme {
           foregroundColor: backgroundColor,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           elevation: 0,
-          shadowColor: primaryColor.withOpacity(0.5),
+          shadowColor: primaryColor.withValues(alpha: 0.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

@@ -20,14 +20,7 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<GateSimulatorBloc, GateSimulatorState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: CustomAppBar(
-            onGridToggle: () {
-              // TODO: Implement grid view toggle
-            },
-            onThemeToggle: () {
-              // TODO: Implement theme toggle
-            },
-          ),
+          appBar: CustomAppBar(onGridToggle: () {}, onThemeToggle: () {}),
           body: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24.0),
@@ -120,30 +113,6 @@ class HomeScreen extends StatelessWidget {
           bottomNavigationBar: const GateBottomNavBar(),
         );
       },
-    );
-  }
-
-  void _showGateInfo(BuildContext context, GateSimulatorState state) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(state.currentGate.name),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Formula: ${state.currentGate.formula}'),
-            const SizedBox(height: 8),
-            Text('Description: ${state.currentGate.description}'),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Close'),
-          ),
-        ],
-      ),
     );
   }
 }
