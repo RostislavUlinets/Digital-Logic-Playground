@@ -9,55 +9,65 @@ class OutputIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          'OUTPUT',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppTheme.surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: value
+              ? AppTheme.neonCyan.withValues(alpha: 0.5)
+              : AppTheme.surfaceVariant,
+          width: 2,
         ),
-        const SizedBox(height: 12),
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          padding: const EdgeInsets.all(20),
-          width: 80,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: value ? AppTheme.outputOnColor : AppTheme.outputOffColor,
-            border: Border.all(
-              color: value ? AppTheme.outputOnColor : Colors.grey.shade700,
-              width: 2,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'OUTPUT',
+            style: TextStyle(
+              color: AppTheme.textSecondary,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.5,
             ),
-            boxShadow: [
-              BoxShadow(
+          ),
+          const SizedBox(height: 12),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: value
+                    ? [AppTheme.neonCyan, AppTheme.primaryColor]
+                    : [AppTheme.outputOffColor, AppTheme.outputOffColor],
+              ),
+              border: Border.all(
                 color: value
-                    ? AppTheme.outputOnColor.withValues(alpha: 0.5)
-                    : Colors.transparent,
-                blurRadius: value ? 14 : 0,
-                spreadRadius: value ? 3 : 0,
-              ),
-            ],
-          ),
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return ScaleTransition(scale: animation, child: child);
-            },
-            child: Text(
-              value ? '1' : '0',
-              key: ValueKey<bool>(value),
-              style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 48,
+                    ? AppTheme.neonCyan.withValues(alpha: 0.8)
+                    : AppTheme.textSecondary.withValues(alpha: 0.3),
+                width: 2,
               ),
             ),
+            child: AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              style: TextStyle(
+                fontSize: 36,
+                color: value
+                    ? AppTheme.backgroundColor
+                    : AppTheme.textSecondary,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.5,
+              ),
+              child: Text(value ? '1' : '0'),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

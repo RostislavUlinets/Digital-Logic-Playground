@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/theme/app_theme.dart';
 
 class TruthTableWidget extends StatefulWidget {
   final List<Map<String, bool>> truthTable;
@@ -70,17 +71,28 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
                     final row = entry.value;
                     final isCurrentCombination =
                         row['A'] == widget.inputA && row['B'] == widget.inputB;
+                    final isOutputOne = row['OUT'] == true;
 
                     return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.easeInOut,
                         decoration: BoxDecoration(
                           color: isCurrentCombination
-                              ? Theme.of(context).colorScheme.primaryContainer
-                              : null,
+                              ? AppTheme.primaryColor.withValues(alpha: 0.12)
+                              : Colors.transparent,
                           borderRadius: BorderRadius.circular(8),
+                          border: isCurrentCombination
+                              ? Border.all(
+                                  color: AppTheme.primaryColor.withValues(
+                                    alpha: 0.4,
+                                  ),
+                                  width: 1.5,
+                                )
+                              : null,
                         ),
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        padding: const EdgeInsets.symmetric(vertical: 12.0),
                         child: Row(
                           children: [
                             Expanded(
@@ -88,6 +100,7 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
                                 context,
                                 row['A']! ? '1' : '0',
                                 isCurrentCombination,
+                                row['A']!,
                               ),
                             ),
                             Expanded(
@@ -95,6 +108,7 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
                                 context,
                                 row['B']! ? '1' : '0',
                                 isCurrentCombination,
+                                row['B']!,
                               ),
                             ),
                             Expanded(
@@ -102,6 +116,8 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
                                 context,
                                 row['OUT']! ? '1' : '0',
                                 isCurrentCombination,
+                                isOutputOne,
+                                isOutput: true,
                               ),
                             ),
                           ],
@@ -122,23 +138,44 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
     return Center(
       child: Text(
         text,
-        style: Theme.of(
-          context,
-        ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: AppTheme.primaryColor,
+          letterSpacing: 0.5,
+        ),
       ),
     );
   }
 
-  Widget _buildDataCell(BuildContext context, String text, bool isHighlighted) {
+  Widget _buildDataCell(
+    BuildContext context,
+    String text,
+    bool isHighlighted,
+    bool isValueOne, {
+    bool isOutput = false,
+  }) {
+    Color getTextColor() {
+      if (isOutput && isValueOne) {
+        return AppTheme.neonCyan;
+      }
+      if (isValueOne) {
+        return AppTheme.primaryColor;
+      }
+      return AppTheme.textSecondary;
+    }
+
     return Center(
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-          fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
-          color: isHighlighted
-              ? Theme.of(context).colorScheme.onPrimaryContainer
-              : null,
+      child: AnimatedDefaultTextStyle(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: isHighlighted ? FontWeight.bold : FontWeight.w500,
+          color: getTextColor(),
+          letterSpacing: 0.3,
         ),
+        child: Text(text),
       ),
     );
   }

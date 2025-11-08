@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/theme/app_theme.dart';
 import '../../domain/entities/gate_type.dart';
 
 class GatePainter extends CustomPainter {
@@ -11,8 +12,8 @@ class GatePainter extends CustomPainter {
 
   GatePainter({
     required this.gateType,
-    this.lineColor = const Color(0xFFFF5050), // Neon red-pink
-    this.glowColor = const Color(0xFFFF5050),
+    this.lineColor = const Color(0xFF00C6AE), // Neon teal/cyan
+    this.glowColor = const Color(0xFF00FFFF), // Electric cyan glow
     this.inputA = false,
     this.inputB = false,
     this.output = false,
@@ -20,54 +21,45 @@ class GatePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Outer glow effect (strongest)
-    final outerGlowPaint = Paint()
-      ..color = glowColor.withValues(alpha: 0.08)
+    // Subtle glow effect for depth only
+    final glowPaint = Paint()
+      ..color = glowColor.withValues(alpha: 0.05)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 8
+      ..strokeWidth = 5
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
 
-    // Middle glow effect
-    final middleGlowPaint = Paint()
-      ..color = glowColor.withValues(alpha: 0.15)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 4
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
-
-    // Main neon line paint
+    // Main line paint
     final neonPaint = Paint()
       ..color = lineColor
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 3
+      ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
 
     // Helper function to create connection paints based on state
     Paint getConnectionPaint(bool isActive) {
       return Paint()
-        ..color = isActive ? const Color(0xFF4CAF50) : Colors.grey.shade700
+        ..color = isActive ? AppTheme.primaryColor : AppTheme.inputOffColor
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 2
+        ..strokeWidth = 2.5
         ..strokeCap = StrokeCap.round;
     }
 
     Paint getDotPaint(bool isActive) {
       return Paint()
-        ..color = isActive ? const Color(0xFF4CAF50) : Colors.grey.shade700
+        ..color = isActive ? AppTheme.neonCyan : AppTheme.inputOffColor
         ..style = PaintingStyle.fill;
     }
 
     Paint getDotGlowPaint(bool isActive) {
       return Paint()
         ..color = isActive
-            ? const Color(0xFF4CAF50).withValues(alpha: 0.8)
-            : Colors.grey.shade700.withValues(alpha: 0.3)
+            ? AppTheme.neonCyan.withValues(alpha: 0.4)
+            : AppTheme.inputOffColor.withValues(alpha: 0.2)
         ..style = PaintingStyle.fill
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, isActive ? 8 : 4);
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, isActive ? 6 : 3);
     }
 
     switch (gateType) {
@@ -75,8 +67,7 @@ class GatePainter extends CustomPainter {
         _drawAndGate(
           canvas,
           size,
-          outerGlowPaint,
-          middleGlowPaint,
+          glowPaint,
           neonPaint,
           getConnectionPaint,
           getDotPaint,
@@ -87,8 +78,7 @@ class GatePainter extends CustomPainter {
         _drawOrGate(
           canvas,
           size,
-          outerGlowPaint,
-          middleGlowPaint,
+          glowPaint,
           neonPaint,
           getConnectionPaint,
           getDotPaint,
@@ -99,8 +89,7 @@ class GatePainter extends CustomPainter {
         _drawNotGate(
           canvas,
           size,
-          outerGlowPaint,
-          middleGlowPaint,
+          glowPaint,
           neonPaint,
           getConnectionPaint,
           getDotPaint,
@@ -111,8 +100,7 @@ class GatePainter extends CustomPainter {
         _drawNandGate(
           canvas,
           size,
-          outerGlowPaint,
-          middleGlowPaint,
+          glowPaint,
           neonPaint,
           getConnectionPaint,
           getDotPaint,
@@ -123,8 +111,7 @@ class GatePainter extends CustomPainter {
         _drawNorGate(
           canvas,
           size,
-          outerGlowPaint,
-          middleGlowPaint,
+          glowPaint,
           neonPaint,
           getConnectionPaint,
           getDotPaint,
@@ -135,8 +122,7 @@ class GatePainter extends CustomPainter {
         _drawXorGate(
           canvas,
           size,
-          outerGlowPaint,
-          middleGlowPaint,
+          glowPaint,
           neonPaint,
           getConnectionPaint,
           getDotPaint,
@@ -147,8 +133,7 @@ class GatePainter extends CustomPainter {
         _drawXnorGate(
           canvas,
           size,
-          outerGlowPaint,
-          middleGlowPaint,
+          glowPaint,
           neonPaint,
           getConnectionPaint,
           getDotPaint,
@@ -161,8 +146,7 @@ class GatePainter extends CustomPainter {
   void _drawAndGate(
     Canvas canvas,
     Size size,
-    Paint outerGlow,
-    Paint middleGlow,
+    Paint glow,
     Paint neon,
     Paint Function(bool) getConnection,
     Paint Function(bool) getDot,
@@ -206,9 +190,8 @@ class GatePainter extends CustomPainter {
     path.lineTo(width * 0.3, centerY + 30);
     path.lineTo(width * 0.3, centerY - 30);
 
-    // Draw neon glow layers (outer to inner)
-    canvas.drawPath(path, outerGlow);
-    canvas.drawPath(path, middleGlow);
+    // Draw subtle glow and main path
+    canvas.drawPath(path, glow);
     canvas.drawPath(path, neon);
 
     // Output line
@@ -226,8 +209,7 @@ class GatePainter extends CustomPainter {
   void _drawOrGate(
     Canvas canvas,
     Size size,
-    Paint outerGlow,
-    Paint middleGlow,
+    Paint glow,
     Paint neon,
     Paint Function(bool) getConnection,
     Paint Function(bool) getDot,
@@ -267,8 +249,7 @@ class GatePainter extends CustomPainter {
       centerY - 30,
     );
 
-    canvas.drawPath(path, outerGlow);
-    canvas.drawPath(path, middleGlow);
+    canvas.drawPath(path, glow);
     canvas.drawPath(path, neon);
 
     canvas.drawLine(
@@ -283,8 +264,7 @@ class GatePainter extends CustomPainter {
   void _drawNotGate(
     Canvas canvas,
     Size size,
-    Paint outerGlow,
-    Paint middleGlow,
+    Paint glow,
     Paint neon,
     Paint Function(bool) getConnection,
     Paint Function(bool) getDot,
@@ -308,13 +288,11 @@ class GatePainter extends CustomPainter {
     path.lineTo(width * 0.25, centerY + 30);
     path.lineTo(width * 0.25, centerY - 30);
 
-    canvas.drawPath(path, outerGlow);
-    canvas.drawPath(path, middleGlow);
+    canvas.drawPath(path, glow);
     canvas.drawPath(path, neon);
 
-    // Inversion circle with glow
-    canvas.drawCircle(Offset(width * 0.6, centerY), 8, outerGlow);
-    canvas.drawCircle(Offset(width * 0.6, centerY), 6, middleGlow);
+    // Inversion circle with subtle glow
+    canvas.drawCircle(Offset(width * 0.6, centerY), 6, glow);
     canvas.drawCircle(Offset(width * 0.6, centerY), 5, neon);
 
     canvas.drawLine(
@@ -329,8 +307,7 @@ class GatePainter extends CustomPainter {
   void _drawNandGate(
     Canvas canvas,
     Size size,
-    Paint outerGlow,
-    Paint middleGlow,
+    Paint glow,
     Paint neon,
     Paint Function(bool) getConnection,
     Paint Function(bool) getDot,
@@ -370,13 +347,11 @@ class GatePainter extends CustomPainter {
     path.lineTo(width * 0.3, centerY + 30);
     path.lineTo(width * 0.3, centerY - 30);
 
-    canvas.drawPath(path, outerGlow);
-    canvas.drawPath(path, middleGlow);
+    canvas.drawPath(path, glow);
     canvas.drawPath(path, neon);
 
-    // Inversion circle with glow
-    canvas.drawCircle(Offset(width * 0.55, centerY), 8, outerGlow);
-    canvas.drawCircle(Offset(width * 0.55, centerY), 6, middleGlow);
+    // Inversion circle with subtle glow
+    canvas.drawCircle(Offset(width * 0.55, centerY), 6, glow);
     canvas.drawCircle(Offset(width * 0.55, centerY), 5, neon);
 
     canvas.drawLine(
@@ -391,8 +366,7 @@ class GatePainter extends CustomPainter {
   void _drawNorGate(
     Canvas canvas,
     Size size,
-    Paint outerGlow,
-    Paint middleGlow,
+    Paint glow,
     Paint neon,
     Paint Function(bool) getConnection,
     Paint Function(bool) getDot,
@@ -432,13 +406,11 @@ class GatePainter extends CustomPainter {
       centerY - 30,
     );
 
-    canvas.drawPath(path, outerGlow);
-    canvas.drawPath(path, middleGlow);
+    canvas.drawPath(path, glow);
     canvas.drawPath(path, neon);
 
-    // Inversion circle with glow
-    canvas.drawCircle(Offset(width * 0.55, centerY), 8, outerGlow);
-    canvas.drawCircle(Offset(width * 0.55, centerY), 6, middleGlow);
+    // Inversion circle with subtle glow
+    canvas.drawCircle(Offset(width * 0.55, centerY), 6, glow);
     canvas.drawCircle(Offset(width * 0.55, centerY), 5, neon);
 
     canvas.drawLine(
@@ -453,8 +425,7 @@ class GatePainter extends CustomPainter {
   void _drawXorGate(
     Canvas canvas,
     Size size,
-    Paint outerGlow,
-    Paint middleGlow,
+    Paint glow,
     Paint neon,
     Paint Function(bool) getConnection,
     Paint Function(bool) getDot,
@@ -493,8 +464,7 @@ class GatePainter extends CustomPainter {
       centerY + 30,
     );
 
-    canvas.drawPath(extraCurve, outerGlow);
-    canvas.drawPath(extraCurve, middleGlow);
+    canvas.drawPath(extraCurve, glow);
     canvas.drawPath(extraCurve, neon);
 
     final path = Path();
@@ -508,8 +478,7 @@ class GatePainter extends CustomPainter {
       centerY - 30,
     );
 
-    canvas.drawPath(path, outerGlow);
-    canvas.drawPath(path, middleGlow);
+    canvas.drawPath(path, glow);
     canvas.drawPath(path, neon);
 
     canvas.drawLine(
@@ -524,8 +493,7 @@ class GatePainter extends CustomPainter {
   void _drawXnorGate(
     Canvas canvas,
     Size size,
-    Paint outerGlow,
-    Paint middleGlow,
+    Paint glow,
     Paint neon,
     Paint Function(bool) getConnection,
     Paint Function(bool) getDot,
@@ -564,8 +532,7 @@ class GatePainter extends CustomPainter {
       centerY + 30,
     );
 
-    canvas.drawPath(extraCurve, outerGlow);
-    canvas.drawPath(extraCurve, middleGlow);
+    canvas.drawPath(extraCurve, glow);
     canvas.drawPath(extraCurve, neon);
 
     final path = Path();
@@ -579,13 +546,11 @@ class GatePainter extends CustomPainter {
       centerY - 30,
     );
 
-    canvas.drawPath(path, outerGlow);
-    canvas.drawPath(path, middleGlow);
+    canvas.drawPath(path, glow);
     canvas.drawPath(path, neon);
 
-    // Inversion circle with glow
-    canvas.drawCircle(Offset(width * 0.6, centerY), 8, outerGlow);
-    canvas.drawCircle(Offset(width * 0.6, centerY), 6, middleGlow);
+    // Inversion circle with subtle glow
+    canvas.drawCircle(Offset(width * 0.6, centerY), 6, glow);
     canvas.drawCircle(Offset(width * 0.6, centerY), 5, neon);
 
     canvas.drawLine(

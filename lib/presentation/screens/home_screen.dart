@@ -5,6 +5,7 @@ import '../../domain/entities/gate_type.dart';
 import '../blocs/gate_simulator/gate_simulator_bloc.dart';
 import '../blocs/gate_simulator/gate_simulator_event.dart';
 import '../blocs/gate_simulator/gate_simulator_state.dart';
+import '../widgets/custom_app_bar.dart';
 import '../widgets/gate_bottom_nav_bar.dart';
 import '../widgets/gate_symbol.dart';
 import '../widgets/input_toggle.dart';
@@ -19,17 +20,7 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<GateSimulatorBloc, GateSimulatorState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(state.currentGate.name),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.info_outline),
-                onPressed: () {
-                  _showGateInfo(context, state);
-                },
-              ),
-            ],
-          ),
+          appBar: CustomAppBar(onGridToggle: () {}, onThemeToggle: () {}),
           body: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24.0),
@@ -38,7 +29,9 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   // Gate symbol with fade transition
                   AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 200),
+                    switchInCurve: Curves.easeInOut,
+                    switchOutCurve: Curves.easeInOut,
                     transitionBuilder:
                         (Widget child, Animation<double> animation) {
                           return FadeTransition(
@@ -120,30 +113,6 @@ class HomeScreen extends StatelessWidget {
           bottomNavigationBar: const GateBottomNavBar(),
         );
       },
-    );
-  }
-
-  void _showGateInfo(BuildContext context, GateSimulatorState state) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(state.currentGate.name),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Formula: ${state.currentGate.formula}'),
-            const SizedBox(height: 8),
-            Text('Description: ${state.currentGate.description}'),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Close'),
-          ),
-        ],
-      ),
     );
   }
 }

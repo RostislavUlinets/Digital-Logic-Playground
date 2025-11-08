@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/theme/app_theme.dart';
 import '../../domain/entities/gate_type.dart';
 import '../painters/gate_painter.dart';
 
@@ -33,7 +34,7 @@ class GateSymbol extends StatelessWidget {
       child: CustomPaint(
         painter: GatePainter(
           gateType: gateType,
-          lineColor: const Color(0xFFFF5050),
+          lineColor: AppTheme.primaryColor, // Use teal/cyan for neon effect
           inputA: inputA,
           inputB: inputB,
           output: output,
