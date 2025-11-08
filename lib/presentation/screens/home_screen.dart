@@ -6,8 +6,10 @@ import '../blocs/gate_simulator/gate_simulator_bloc.dart';
 import '../blocs/gate_simulator/gate_simulator_event.dart';
 import '../blocs/gate_simulator/gate_simulator_state.dart';
 import '../widgets/gate_bottom_nav_bar.dart';
+import '../widgets/gate_symbol.dart';
 import '../widgets/input_toggle.dart';
 import '../widgets/output_indicator.dart';
+import '../widgets/truth_table_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -46,7 +48,11 @@ class HomeScreen extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                  const SizedBox(height: 48),
+                  const SizedBox(height: 32),
+
+                  // Gate symbol
+                  GateSymbol(gateType: state.currentGateType),
+                  const SizedBox(height: 32),
 
                   // Input toggles
                   Row(
@@ -84,6 +90,15 @@ class HomeScreen extends StatelessWidget {
                   // Output indicator
                   OutputIndicator(value: state.output),
                   const SizedBox(height: 32),
+
+                  // Truth Table
+                  if (state.truthTable.isNotEmpty)
+                    TruthTableWidget(
+                      truthTable: state.truthTable,
+                      inputA: state.inputA,
+                      inputB: state.inputB,
+                    ),
+                  const SizedBox(height: 16),
 
                   // Description
                   Card(
