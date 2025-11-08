@@ -6,6 +6,7 @@ import 'package:digital_logic_playground/domain/entities/gate_type.dart';
 import 'package:digital_logic_playground/domain/entities/logic_gate.dart';
 import 'package:digital_logic_playground/domain/repositories/settings_repository.dart';
 import 'package:digital_logic_playground/domain/usecases/calculate_gate_output.dart';
+import 'package:digital_logic_playground/domain/usecases/get_truth_table.dart';
 import 'package:digital_logic_playground/presentation/blocs/gate_simulator/gate_simulator_bloc.dart';
 import 'package:digital_logic_playground/presentation/blocs/gate_simulator/gate_simulator_event.dart';
 import 'package:digital_logic_playground/presentation/blocs/gate_simulator/gate_simulator_state.dart';
@@ -15,6 +16,7 @@ class MockSettingsRepository extends Mock implements SettingsRepository {}
 void main() {
   late GateSimulatorBloc bloc;
   late CalculateGateOutput calculateGateOutput;
+  late GetTruthTable getTruthTable;
   late MockSettingsRepository mockSettingsRepository;
 
   setUpAll(() {
@@ -23,9 +25,11 @@ void main() {
 
   setUp(() {
     calculateGateOutput = CalculateGateOutput();
+    getTruthTable = GetTruthTable(calculateGateOutput);
     mockSettingsRepository = MockSettingsRepository();
     bloc = GateSimulatorBloc(
       calculateGateOutput: calculateGateOutput,
+      getTruthTable: getTruthTable,
       settingsRepository: mockSettingsRepository,
     );
   });
@@ -56,6 +60,7 @@ void main() {
             inputA: false,
             inputB: false,
             output: false,
+            truthTable: getTruthTable(GateType.and),
           ),
         ],
         verify: (_) {
@@ -79,6 +84,7 @@ void main() {
           inputA: true,
           inputB: false,
           output: false,
+          truthTable: getTruthTable(GateType.and),
         ),
         act: (bloc) => bloc.add(const SelectGateType(GateType.or)),
         expect: () => [
@@ -88,6 +94,7 @@ void main() {
             inputA: true,
             inputB: false,
             output: true, // OR gate with A=true, B=false outputs true
+            truthTable: getTruthTable(GateType.or),
           ),
         ],
       );
@@ -108,6 +115,7 @@ void main() {
             inputA: false,
             inputB: false,
             output: true, // NOT gate with A=false outputs true
+            truthTable: getTruthTable(GateType.not),
           ),
         ],
       );
@@ -125,6 +133,7 @@ void main() {
             inputA: true,
             inputB: false,
             output: false, // AND gate with A=true, B=false outputs false
+            truthTable: const [],
           ),
         ],
       );
@@ -138,6 +147,7 @@ void main() {
           inputA: true,
           inputB: true,
           output: true,
+          truthTable: getTruthTable(GateType.and),
         ),
         act: (bloc) => bloc.add(const ToggleInputA()),
         expect: () => [
@@ -147,6 +157,7 @@ void main() {
             inputA: false,
             inputB: true,
             output: false, // AND gate with A=false, B=true outputs false
+            truthTable: getTruthTable(GateType.and),
           ),
         ],
       );
@@ -164,6 +175,7 @@ void main() {
             inputA: false,
             inputB: true,
             output: false, // AND gate with A=false, B=true outputs false
+            truthTable: const [],
           ),
         ],
       );
@@ -177,6 +189,7 @@ void main() {
           inputA: false,
           inputB: true,
           output: true,
+          truthTable: getTruthTable(GateType.or),
         ),
         act: (bloc) => bloc.add(const ToggleInputB()),
         expect: () => [
@@ -186,6 +199,7 @@ void main() {
             inputA: false,
             inputB: false,
             output: false, // OR gate with A=false, B=false outputs false
+            truthTable: getTruthTable(GateType.or),
           ),
         ],
       );
@@ -203,6 +217,7 @@ void main() {
             inputA: true,
             inputB: false,
             output: false,
+            truthTable: const [],
           ),
         ],
       );
@@ -216,6 +231,7 @@ void main() {
           inputA: true,
           inputB: false,
           output: false,
+          truthTable: getTruthTable(GateType.not),
         ),
         act: (bloc) => bloc.add(const SetInputA(false)),
         expect: () => [
@@ -225,6 +241,7 @@ void main() {
             inputA: false,
             inputB: false,
             output: true, // NOT gate with A=false outputs true
+            truthTable: getTruthTable(GateType.not),
           ),
         ],
       );
@@ -242,6 +259,7 @@ void main() {
             inputA: false,
             inputB: true,
             output: false,
+            truthTable: const [],
           ),
         ],
       );
@@ -255,6 +273,7 @@ void main() {
           inputA: true,
           inputB: true,
           output: false,
+          truthTable: getTruthTable(GateType.xor),
         ),
         act: (bloc) => bloc.add(const SetInputB(false)),
         expect: () => [
@@ -264,6 +283,7 @@ void main() {
             inputA: true,
             inputB: false,
             output: true, // XOR gate with A=true, B=false outputs true
+            truthTable: getTruthTable(GateType.xor),
           ),
         ],
       );
@@ -286,6 +306,7 @@ void main() {
             inputA: false,
             inputB: false,
             output: false,
+            truthTable: getTruthTable(GateType.or),
           ),
         ],
         verify: (_) {
@@ -322,6 +343,7 @@ void main() {
           inputA: true,
           inputB: true,
           output: true,
+          truthTable: getTruthTable(GateType.and),
         ),
         act: (bloc) => bloc.add(const LoadLastGateType()),
         expect: () => [
@@ -331,6 +353,7 @@ void main() {
             inputA: true,
             inputB: true,
             output: false, // NAND gate with A=true, B=true outputs false
+            truthTable: getTruthTable(GateType.nand),
           ),
         ],
       );
