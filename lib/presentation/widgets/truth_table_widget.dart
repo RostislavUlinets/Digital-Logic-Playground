@@ -108,7 +108,7 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
                         ),
                       ),
                     );
-                  }).toList(),
+                  }),
                 ],
               ),
             ),
