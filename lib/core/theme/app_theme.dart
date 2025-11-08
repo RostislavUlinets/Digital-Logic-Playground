@@ -92,14 +92,8 @@ class AppTheme {
           fontWeight: FontWeight.w600,
           color: Colors.white,
         ),
-        bodyLarge: TextStyle(
-          fontSize: 16,
-          color: Colors.white70,
-        ),
-        bodyMedium: TextStyle(
-          fontSize: 14,
-          color: Colors.white60,
-        ),
+        bodyLarge: TextStyle(fontSize: 16, color: Colors.white70),
+        bodyMedium: TextStyle(fontSize: 14, color: Colors.white60),
       ),
     );
   }

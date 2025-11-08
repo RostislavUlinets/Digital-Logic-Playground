@@ -38,10 +38,7 @@ class GateBottomNavBar extends StatelessWidget {
               icon: Icon(Icons.do_not_disturb_on),
               label: 'NAND',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.block),
-              label: 'NOR',
-            ),
+            BottomNavigationBarItem(icon: Icon(Icons.block), label: 'NOR'),
             BottomNavigationBarItem(
               icon: Icon(Icons.compare_arrows),
               label: 'XOR',

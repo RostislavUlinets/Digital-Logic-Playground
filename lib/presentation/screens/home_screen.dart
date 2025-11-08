@@ -38,8 +38,8 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     state.currentGate.formula,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                   const SizedBox(height: 32),
                   Text(

@@ -18,12 +18,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<GateSimulatorBloc>(
-          create: (context) => getIt<GateSimulatorBloc>()
-            ..add(const LoadLastGateType()),
+          create: (context) =>
+              getIt<GateSimulatorBloc>()..add(const LoadLastGateType()),
         ),
         BlocProvider<SettingsBloc>(
-          create: (context) => getIt<SettingsBloc>()
-            ..add(const LoadSettings()),
+          create: (context) => getIt<SettingsBloc>()..add(const LoadSettings()),
         ),
       ],
       child: BlocBuilder<SettingsBloc, SettingsState>(
