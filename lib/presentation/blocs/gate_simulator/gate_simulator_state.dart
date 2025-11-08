@@ -9,6 +9,7 @@ class GateSimulatorState extends Equatable {
   final bool inputA;
   final bool inputB;
   final bool output;
+  final List<Map<String, bool>> truthTable;
 
   const GateSimulatorState({
     required this.currentGateType,
@@ -16,6 +17,7 @@ class GateSimulatorState extends Equatable {
     required this.inputA,
     required this.inputB,
     required this.output,
+    required this.truthTable,
   });
 
   factory GateSimulatorState.initial() {
@@ -25,6 +27,7 @@ class GateSimulatorState extends Equatable {
       inputA: false,
       inputB: false,
       output: false,
+      truthTable: const [],
     );
   }
 
@@ -34,6 +37,7 @@ class GateSimulatorState extends Equatable {
     bool? inputA,
     bool? inputB,
     bool? output,
+    List<Map<String, bool>>? truthTable,
   }) {
     return GateSimulatorState(
       currentGateType: currentGateType ?? this.currentGateType,
@@ -41,6 +45,7 @@ class GateSimulatorState extends Equatable {
       inputA: inputA ?? this.inputA,
       inputB: inputB ?? this.inputB,
       output: output ?? this.output,
+      truthTable: truthTable ?? this.truthTable,
     );
   }
 
@@ -51,5 +56,6 @@ class GateSimulatorState extends Equatable {
     inputA,
     inputB,
     output,
+    truthTable,
   ];
 }

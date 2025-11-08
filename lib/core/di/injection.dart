@@ -33,6 +33,7 @@ Future<void> initializeDependencies() async {
   getIt.registerFactory<GateSimulatorBloc>(
     () => GateSimulatorBloc(
       calculateGateOutput: getIt(),
+      getTruthTable: getIt(),
       settingsRepository: getIt(),
     ),
   );
