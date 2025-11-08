@@ -22,7 +22,7 @@ class GatePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // Outer glow effect (strongest)
     final outerGlowPaint = Paint()
-      ..color = glowColor.withOpacity(0.08)
+      ..color = glowColor.withValues(alpha: 0.08)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 8
       ..strokeCap = StrokeCap.round
@@ -31,7 +31,7 @@ class GatePainter extends CustomPainter {
 
     // Middle glow effect
     final middleGlowPaint = Paint()
-      ..color = glowColor.withOpacity(0.15)
+      ..color = glowColor.withValues(alpha: 0.15)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 4
       ..strokeCap = StrokeCap.round
@@ -47,7 +47,7 @@ class GatePainter extends CustomPainter {
       ..strokeJoin = StrokeJoin.round;
 
     // Helper function to create connection paints based on state
-    Paint _getConnectionPaint(bool isActive) {
+    Paint getConnectionPaint(bool isActive) {
       return Paint()
         ..color = isActive ? const Color(0xFF4CAF50) : Colors.grey.shade700
         ..style = PaintingStyle.stroke
@@ -55,17 +55,17 @@ class GatePainter extends CustomPainter {
         ..strokeCap = StrokeCap.round;
     }
 
-    Paint _getDotPaint(bool isActive) {
+    Paint getDotPaint(bool isActive) {
       return Paint()
         ..color = isActive ? const Color(0xFF4CAF50) : Colors.grey.shade700
         ..style = PaintingStyle.fill;
     }
 
-    Paint _getDotGlowPaint(bool isActive) {
+    Paint getDotGlowPaint(bool isActive) {
       return Paint()
         ..color = isActive
-            ? const Color(0xFF4CAF50).withOpacity(0.8)
-            : Colors.grey.shade700.withOpacity(0.3)
+            ? const Color(0xFF4CAF50).withValues(alpha: 0.8)
+            : Colors.grey.shade700.withValues(alpha: 0.3)
         ..style = PaintingStyle.fill
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, isActive ? 8 : 4);
     }
@@ -78,9 +78,9 @@ class GatePainter extends CustomPainter {
           outerGlowPaint,
           middleGlowPaint,
           neonPaint,
-          _getConnectionPaint,
-          _getDotPaint,
-          _getDotGlowPaint,
+          getConnectionPaint,
+          getDotPaint,
+          getDotGlowPaint,
         );
         break;
       case GateType.or:
@@ -90,9 +90,9 @@ class GatePainter extends CustomPainter {
           outerGlowPaint,
           middleGlowPaint,
           neonPaint,
-          _getConnectionPaint,
-          _getDotPaint,
-          _getDotGlowPaint,
+          getConnectionPaint,
+          getDotPaint,
+          getDotGlowPaint,
         );
         break;
       case GateType.not:
@@ -102,9 +102,9 @@ class GatePainter extends CustomPainter {
           outerGlowPaint,
           middleGlowPaint,
           neonPaint,
-          _getConnectionPaint,
-          _getDotPaint,
-          _getDotGlowPaint,
+          getConnectionPaint,
+          getDotPaint,
+          getDotGlowPaint,
         );
         break;
       case GateType.nand:
@@ -114,9 +114,9 @@ class GatePainter extends CustomPainter {
           outerGlowPaint,
           middleGlowPaint,
           neonPaint,
-          _getConnectionPaint,
-          _getDotPaint,
-          _getDotGlowPaint,
+          getConnectionPaint,
+          getDotPaint,
+          getDotGlowPaint,
         );
         break;
       case GateType.nor:
@@ -126,9 +126,9 @@ class GatePainter extends CustomPainter {
           outerGlowPaint,
           middleGlowPaint,
           neonPaint,
-          _getConnectionPaint,
-          _getDotPaint,
-          _getDotGlowPaint,
+          getConnectionPaint,
+          getDotPaint,
+          getDotGlowPaint,
         );
         break;
       case GateType.xor:
@@ -138,9 +138,9 @@ class GatePainter extends CustomPainter {
           outerGlowPaint,
           middleGlowPaint,
           neonPaint,
-          _getConnectionPaint,
-          _getDotPaint,
-          _getDotGlowPaint,
+          getConnectionPaint,
+          getDotPaint,
+          getDotGlowPaint,
         );
         break;
       case GateType.xnor:
@@ -150,9 +150,9 @@ class GatePainter extends CustomPainter {
           outerGlowPaint,
           middleGlowPaint,
           neonPaint,
-          _getConnectionPaint,
-          _getDotPaint,
-          _getDotGlowPaint,
+          getConnectionPaint,
+          getDotPaint,
+          getDotGlowPaint,
         );
         break;
     }

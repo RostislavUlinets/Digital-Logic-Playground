@@ -33,7 +33,7 @@ class InputToggle extends StatelessWidget {
         Switch(
           value: value,
           onChanged: _handleTap,
-          activeColor: Theme.of(context).colorScheme.primary,
+          activeTrackColor: Theme.of(context).colorScheme.primary,
         ),
         const SizedBox(height: 8),
         AnimatedSwitcher(
