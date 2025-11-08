@@ -38,8 +38,6 @@ Future<void> initializeDependencies() async {
   );
 
   getIt.registerFactory<SettingsBloc>(
-    () => SettingsBloc(
-      settingsRepository: getIt(),
-    ),
+    () => SettingsBloc(settingsRepository: getIt()),
   );
 }

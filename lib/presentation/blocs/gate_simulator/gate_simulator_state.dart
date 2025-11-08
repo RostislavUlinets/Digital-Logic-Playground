@@ -46,10 +46,10 @@ class GateSimulatorState extends Equatable {
 
   @override
   List<Object?> get props => [
-        currentGateType,
-        currentGate,
-        inputA,
-        inputB,
-        output,
-      ];
+    currentGateType,
+    currentGate,
+    inputA,
+    inputB,
+    output,
+  ];
 }

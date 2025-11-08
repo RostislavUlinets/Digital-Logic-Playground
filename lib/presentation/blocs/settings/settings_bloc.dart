@@ -7,10 +7,9 @@ import 'settings_state.dart';
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SettingsRepository _settingsRepository;
 
-  SettingsBloc({
-    required SettingsRepository settingsRepository,
-  })  : _settingsRepository = settingsRepository,
-        super(SettingsState.initial()) {
+  SettingsBloc({required SettingsRepository settingsRepository})
+    : _settingsRepository = settingsRepository,
+      super(SettingsState.initial()) {
     on<LoadSettings>(_onLoadSettings);
     on<ToggleDarkMode>(_onToggleDarkMode);
     on<SetDarkMode>(_onSetDarkMode);
@@ -24,10 +23,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
     final isDarkMode = await _settingsRepository.getDarkMode();
 
-    emit(state.copyWith(
-      isDarkMode: isDarkMode,
-      isLoading: false,
-    ));
+    emit(state.copyWith(isDarkMode: isDarkMode, isLoading: false));
   }
 
   Future<void> _onToggleDarkMode(

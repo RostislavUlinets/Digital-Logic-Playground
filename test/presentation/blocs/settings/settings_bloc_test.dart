@@ -96,9 +96,7 @@ void main() {
         build: () => bloc,
         seed: () => const SettingsState(isDarkMode: false, isLoading: false),
         act: (bloc) => bloc.add(const ToggleDarkMode()),
-        expect: () => [
-          const SettingsState(isDarkMode: true, isLoading: false),
-        ],
+        expect: () => [const SettingsState(isDarkMode: true, isLoading: false)],
         verify: (_) {
           verify(() => mockSettingsRepository.setDarkMode(true)).called(1);
         },
@@ -116,9 +114,7 @@ void main() {
         build: () => bloc,
         seed: () => const SettingsState(isDarkMode: false, isLoading: false),
         act: (bloc) => bloc.add(const SetDarkMode(true)),
-        expect: () => [
-          const SettingsState(isDarkMode: true, isLoading: false),
-        ],
+        expect: () => [const SettingsState(isDarkMode: true, isLoading: false)],
         verify: (_) {
           verify(() => mockSettingsRepository.setDarkMode(true)).called(1);
         },
