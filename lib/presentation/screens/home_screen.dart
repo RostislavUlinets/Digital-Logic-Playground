@@ -43,8 +43,8 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     state.currentGate.formula,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                   const SizedBox(height: 48),
 
@@ -57,9 +57,9 @@ class HomeScreen extends StatelessWidget {
                           label: 'Input A',
                           value: state.inputA,
                           onTap: () {
-                            context
-                                .read<GateSimulatorBloc>()
-                                .add(const ToggleInputA());
+                            context.read<GateSimulatorBloc>().add(
+                              const ToggleInputA(),
+                            );
                           },
                         ),
                       ),
@@ -71,9 +71,9 @@ class HomeScreen extends StatelessWidget {
                             label: 'Input B',
                             value: state.inputB,
                             onTap: () {
-                              context
-                                  .read<GateSimulatorBloc>()
-                                  .add(const ToggleInputB());
+                              context.read<GateSimulatorBloc>().add(
+                                const ToggleInputB(),
+                              );
                             },
                           ),
                         ),

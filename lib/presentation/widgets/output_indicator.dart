@@ -5,10 +5,7 @@ import '../../core/theme/app_theme.dart';
 class OutputIndicator extends StatelessWidget {
   final bool value;
 
-  const OutputIndicator({
-    super.key,
-    required this.value,
-  });
+  const OutputIndicator({super.key, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +34,18 @@ class OutputIndicator extends StatelessWidget {
           Text(
             'OUTPUT',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 12),
           Text(
             value ? '1' : '0',
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 48,
-                ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 48,
+            ),
           ),
         ],
       ),

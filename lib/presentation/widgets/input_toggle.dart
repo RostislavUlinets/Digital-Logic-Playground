@@ -39,17 +39,17 @@ class InputToggle extends StatelessWidget {
             Text(
               label,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8),
             Text(
               value ? '1' : '0',
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
