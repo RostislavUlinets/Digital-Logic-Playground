@@ -3,17 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/logic_gate.dart';
 import '../../../domain/repositories/settings_repository.dart';
 import '../../../domain/usecases/calculate_gate_output.dart';
+import '../../../domain/usecases/get_truth_table.dart';
 import 'gate_simulator_event.dart';
 import 'gate_simulator_state.dart';
 
 class GateSimulatorBloc extends Bloc<GateSimulatorEvent, GateSimulatorState> {
   final CalculateGateOutput _calculateGateOutput;
+  final GetTruthTable _getTruthTable;
   final SettingsRepository _settingsRepository;
 
   GateSimulatorBloc({
     required CalculateGateOutput calculateGateOutput,
+    required GetTruthTable getTruthTable,
     required SettingsRepository settingsRepository,
   }) : _calculateGateOutput = calculateGateOutput,
+       _getTruthTable = getTruthTable,
        _settingsRepository = settingsRepository,
        super(GateSimulatorState.initial()) {
     on<SelectGateType>(_onSelectGateType);
@@ -34,12 +38,14 @@ class GateSimulatorBloc extends Bloc<GateSimulatorEvent, GateSimulatorState> {
       state.inputA,
       state.inputB,
     );
+    final truthTable = _getTruthTable(event.gateType);
 
     emit(
       state.copyWith(
         currentGateType: event.gateType,
         currentGate: newGate,
         output: output,
+        truthTable: truthTable,
       ),
     );
 
@@ -101,12 +107,14 @@ class GateSimulatorBloc extends Bloc<GateSimulatorEvent, GateSimulatorState> {
         state.inputA,
         state.inputB,
       );
+      final truthTable = _getTruthTable(lastGateType);
 
       emit(
         state.copyWith(
           currentGateType: lastGateType,
           currentGate: newGate,
           output: output,
+          truthTable: truthTable,
         ),
       );
     }
