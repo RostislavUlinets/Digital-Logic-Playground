@@ -6,12 +6,18 @@ class GateSymbol extends StatelessWidget {
   final GateType gateType;
   final double? width;
   final double? height;
+  final bool inputA;
+  final bool inputB;
+  final bool output;
 
   const GateSymbol({
     super.key,
     required this.gateType,
     this.width,
     this.height,
+    this.inputA = false,
+    this.inputB = false,
+    this.output = false,
   });
 
   @override
@@ -27,7 +33,10 @@ class GateSymbol extends StatelessWidget {
       child: CustomPaint(
         painter: GatePainter(
           gateType: gateType,
-          lineColor: const Color(0xFFFF0000),
+          lineColor: const Color(0xFFFF5050),
+          inputA: inputA,
+          inputB: inputB,
+          output: output,
         ),
       ),
     );

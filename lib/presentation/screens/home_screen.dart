@@ -36,23 +36,25 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Gate name and formula
-                  Text(
-                    state.currentGate.name,
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    state.currentGate.formula,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
+                  // Gate symbol with fade transition
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          );
+                        },
+                    child: GateSymbol(
+                      key: ValueKey<GateType>(state.currentGateType),
+                      gateType: state.currentGateType,
+                      inputA: state.inputA,
+                      inputB: state.inputB,
+                      output: state.output,
                     ),
                   ),
-                  const SizedBox(height: 32),
-
-                  // Gate symbol
-                  GateSymbol(gateType: state.currentGateType),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 24),
 
                   // Input toggles
                   Row(
@@ -83,13 +85,13 @@ class HomeScreen extends StatelessWidget {
                             },
                           ),
                         ),
+
+                      Spacer(),
+                      // Output indicator
+                      OutputIndicator(value: state.output),
                     ],
                   ),
                   const SizedBox(height: 48),
-
-                  // Output indicator
-                  OutputIndicator(value: state.output),
-                  const SizedBox(height: 32),
 
                   // Truth Table
                   if (state.truthTable.isNotEmpty)

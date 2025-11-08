@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/entities/gate_type.dart';
@@ -18,6 +19,7 @@ class GateBottomNavBar extends StatelessWidget {
         return BottomNavigationBar(
           currentIndex: currentIndex,
           onTap: (index) {
+            HapticFeedback.selectionClick();
             final gateType = _getGateTypeFromIndex(index);
             context.read<GateSimulatorBloc>().add(SelectGateType(gateType));
           },

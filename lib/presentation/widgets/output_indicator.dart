@@ -9,46 +9,55 @@ class OutputIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: value ? AppTheme.outputOnColor : AppTheme.outputOffColor,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: value ? AppTheme.outputOnColor : Colors.grey.shade700,
-          width: 2,
+    return Column(
+      children: [
+        Text(
+          'OUTPUT',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: value
-                ? AppTheme.outputOnColor.withValues(alpha: 0.4)
-                : Colors.transparent,
-            blurRadius: 12,
-            spreadRadius: 3,
+        const SizedBox(height: 12),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          padding: const EdgeInsets.all(20),
+          width: 80,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: value ? AppTheme.outputOnColor : AppTheme.outputOffColor,
+            border: Border.all(
+              color: value ? AppTheme.outputOnColor : Colors.grey.shade700,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: value
+                    ? AppTheme.outputOnColor.withValues(alpha: 0.5)
+                    : Colors.transparent,
+                blurRadius: value ? 14 : 0,
+                spreadRadius: value ? 3 : 0,
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'OUTPUT',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return ScaleTransition(scale: animation, child: child);
+            },
+            child: Text(
+              value ? '1' : '0',
+              key: ValueKey<bool>(value),
+              style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 48,
+              ),
             ),
           ),
-          const SizedBox(height: 12),
-          Text(
-            value ? '1' : '0',
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 48,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
