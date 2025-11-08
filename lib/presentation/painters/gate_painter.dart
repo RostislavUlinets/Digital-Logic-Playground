@@ -96,18 +96,14 @@ class GatePainter extends CustomPainter {
     final path = Path();
     // Back curve
     path.moveTo(width * 0.25, centerY - 30);
-    path.quadraticBezierTo(
-      width * 0.35, centerY,
-      width * 0.25, centerY + 30,
-    );
+    path.quadraticBezierTo(width * 0.35, centerY, width * 0.25, centerY + 30);
     // Front curve
+    path.quadraticBezierTo(width * 0.4, centerY + 30, width * 0.6, centerY);
     path.quadraticBezierTo(
-      width * 0.4, centerY + 30,
-      width * 0.6, centerY,
-    );
-    path.quadraticBezierTo(
-      width * 0.4, centerY - 30,
-      width * 0.25, centerY - 30,
+      width * 0.4,
+      centerY - 30,
+      width * 0.25,
+      centerY - 30,
     );
     path.close();
 
@@ -141,16 +137,8 @@ class GatePainter extends CustomPainter {
     canvas.drawPath(path, paint);
 
     // Inversion circle
-    canvas.drawCircle(
-      Offset(width * 0.6, centerY),
-      5,
-      fillPaint,
-    );
-    canvas.drawCircle(
-      Offset(width * 0.6, centerY),
-      5,
-      paint,
-    );
+    canvas.drawCircle(Offset(width * 0.6, centerY), 5, fillPaint);
+    canvas.drawCircle(Offset(width * 0.6, centerY), 5, paint);
 
     // Output line
     canvas.drawLine(
@@ -187,16 +175,8 @@ class GatePainter extends CustomPainter {
     canvas.drawPath(path, paint);
 
     // Inversion circle
-    canvas.drawCircle(
-      Offset(width * 0.55, centerY),
-      5,
-      fillPaint,
-    );
-    canvas.drawCircle(
-      Offset(width * 0.55, centerY),
-      5,
-      paint,
-    );
+    canvas.drawCircle(Offset(width * 0.55, centerY), 5, fillPaint);
+    canvas.drawCircle(Offset(width * 0.55, centerY), 5, paint);
 
     // Output line
     canvas.drawLine(
@@ -221,18 +201,14 @@ class GatePainter extends CustomPainter {
     final path = Path();
     // Back curve
     path.moveTo(width * 0.25, centerY - 30);
-    path.quadraticBezierTo(
-      width * 0.35, centerY,
-      width * 0.25, centerY + 30,
-    );
+    path.quadraticBezierTo(width * 0.35, centerY, width * 0.25, centerY + 30);
     // Front curve
+    path.quadraticBezierTo(width * 0.35, centerY + 30, width * 0.5, centerY);
     path.quadraticBezierTo(
-      width * 0.35, centerY + 30,
-      width * 0.5, centerY,
-    );
-    path.quadraticBezierTo(
-      width * 0.35, centerY - 30,
-      width * 0.25, centerY - 30,
+      width * 0.35,
+      centerY - 30,
+      width * 0.25,
+      centerY - 30,
     );
     path.close();
 
@@ -240,16 +216,8 @@ class GatePainter extends CustomPainter {
     canvas.drawPath(path, paint);
 
     // Inversion circle
-    canvas.drawCircle(
-      Offset(width * 0.55, centerY),
-      5,
-      fillPaint,
-    );
-    canvas.drawCircle(
-      Offset(width * 0.55, centerY),
-      5,
-      paint,
-    );
+    canvas.drawCircle(Offset(width * 0.55, centerY), 5, fillPaint);
+    canvas.drawCircle(Offset(width * 0.55, centerY), 5, paint);
 
     // Output line
     canvas.drawLine(
@@ -274,8 +242,10 @@ class GatePainter extends CustomPainter {
     final extraCurve = Path();
     extraCurve.moveTo(width * 0.2, centerY - 30);
     extraCurve.quadraticBezierTo(
-      width * 0.3, centerY,
-      width * 0.2, centerY + 30,
+      width * 0.3,
+      centerY,
+      width * 0.2,
+      centerY + 30,
     );
     canvas.drawPath(extraCurve, paint);
 
@@ -283,18 +253,14 @@ class GatePainter extends CustomPainter {
     final path = Path();
     // Back curve
     path.moveTo(width * 0.3, centerY - 30);
-    path.quadraticBezierTo(
-      width * 0.4, centerY,
-      width * 0.3, centerY + 30,
-    );
+    path.quadraticBezierTo(width * 0.4, centerY, width * 0.3, centerY + 30);
     // Front curve
+    path.quadraticBezierTo(width * 0.45, centerY + 30, width * 0.65, centerY);
     path.quadraticBezierTo(
-      width * 0.45, centerY + 30,
-      width * 0.65, centerY,
-    );
-    path.quadraticBezierTo(
-      width * 0.45, centerY - 30,
-      width * 0.3, centerY - 30,
+      width * 0.45,
+      centerY - 30,
+      width * 0.3,
+      centerY - 30,
     );
     path.close();
 
@@ -324,8 +290,10 @@ class GatePainter extends CustomPainter {
     final extraCurve = Path();
     extraCurve.moveTo(width * 0.2, centerY - 30);
     extraCurve.quadraticBezierTo(
-      width * 0.3, centerY,
-      width * 0.2, centerY + 30,
+      width * 0.3,
+      centerY,
+      width * 0.2,
+      centerY + 30,
     );
     canvas.drawPath(extraCurve, paint);
 
@@ -333,18 +301,14 @@ class GatePainter extends CustomPainter {
     final path = Path();
     // Back curve
     path.moveTo(width * 0.3, centerY - 30);
-    path.quadraticBezierTo(
-      width * 0.4, centerY,
-      width * 0.3, centerY + 30,
-    );
+    path.quadraticBezierTo(width * 0.4, centerY, width * 0.3, centerY + 30);
     // Front curve
+    path.quadraticBezierTo(width * 0.4, centerY + 30, width * 0.55, centerY);
     path.quadraticBezierTo(
-      width * 0.4, centerY + 30,
-      width * 0.55, centerY,
-    );
-    path.quadraticBezierTo(
-      width * 0.4, centerY - 30,
-      width * 0.3, centerY - 30,
+      width * 0.4,
+      centerY - 30,
+      width * 0.3,
+      centerY - 30,
     );
     path.close();
 
@@ -352,16 +316,8 @@ class GatePainter extends CustomPainter {
     canvas.drawPath(path, paint);
 
     // Inversion circle
-    canvas.drawCircle(
-      Offset(width * 0.6, centerY),
-      5,
-      fillPaint,
-    );
-    canvas.drawCircle(
-      Offset(width * 0.6, centerY),
-      5,
-      paint,
-    );
+    canvas.drawCircle(Offset(width * 0.6, centerY), 5, fillPaint);
+    canvas.drawCircle(Offset(width * 0.6, centerY), 5, paint);
 
     // Output line
     canvas.drawLine(
@@ -374,6 +330,6 @@ class GatePainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant GatePainter oldDelegate) {
     return oldDelegate.gateType != gateType ||
-           oldDelegate.lineColor != lineColor;
+        oldDelegate.lineColor != lineColor;
   }
 }

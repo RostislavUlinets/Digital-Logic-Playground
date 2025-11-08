@@ -40,9 +40,7 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
                     'Truth Table',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  Icon(
-                    _isExpanded ? Icons.expand_less : Icons.expand_more,
-                  ),
+                  Icon(_isExpanded ? Icons.expand_less : Icons.expand_more),
                 ],
               ),
             ),
@@ -58,15 +56,9 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
                   // Table header
                   Row(
                     children: [
-                      Expanded(
-                        child: _buildHeaderCell(context, 'A'),
-                      ),
-                      Expanded(
-                        child: _buildHeaderCell(context, 'B'),
-                      ),
-                      Expanded(
-                        child: _buildHeaderCell(context, 'OUT'),
-                      ),
+                      Expanded(child: _buildHeaderCell(context, 'A')),
+                      Expanded(child: _buildHeaderCell(context, 'B')),
+                      Expanded(child: _buildHeaderCell(context, 'OUT')),
                     ],
                   ),
                   const SizedBox(height: 8),
@@ -77,15 +69,15 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
                   ...widget.truthTable.asMap().entries.map((entry) {
                     final row = entry.value;
                     final isCurrentCombination =
-                      row['A'] == widget.inputA && row['B'] == widget.inputB;
+                        row['A'] == widget.inputA && row['B'] == widget.inputB;
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
                       child: Container(
                         decoration: BoxDecoration(
                           color: isCurrentCombination
-                            ? Theme.of(context).colorScheme.primaryContainer
-                            : null,
+                              ? Theme.of(context).colorScheme.primaryContainer
+                              : null,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -130,9 +122,9 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
     return Center(
       child: Text(
         text,
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-          fontWeight: FontWeight.bold,
-        ),
+        style: Theme.of(
+          context,
+        ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -144,8 +136,8 @@ class _TruthTableWidgetState extends State<TruthTableWidget> {
         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
           fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
           color: isHighlighted
-            ? Theme.of(context).colorScheme.onPrimaryContainer
-            : null,
+              ? Theme.of(context).colorScheme.onPrimaryContainer
+              : null,
         ),
       ),
     );
