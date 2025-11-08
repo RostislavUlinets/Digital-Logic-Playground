@@ -21,8 +21,9 @@ void main() {
     group('getLastGateType', () {
       test('should return AND gate type when stored value is "and"', () async {
         // Arrange
-        when(() => mockDataSource.getLastGateType())
-            .thenAnswer((_) async => 'and');
+        when(
+          () => mockDataSource.getLastGateType(),
+        ).thenAnswer((_) async => 'and');
 
         // Act
         final result = await repository.getLastGateType();
@@ -34,8 +35,9 @@ void main() {
 
       test('should return OR gate type when stored value is "or"', () async {
         // Arrange
-        when(() => mockDataSource.getLastGateType())
-            .thenAnswer((_) async => 'or');
+        when(
+          () => mockDataSource.getLastGateType(),
+        ).thenAnswer((_) async => 'or');
 
         // Act
         final result = await repository.getLastGateType();
@@ -47,8 +49,9 @@ void main() {
 
       test('should return NOT gate type when stored value is "not"', () async {
         // Arrange
-        when(() => mockDataSource.getLastGateType())
-            .thenAnswer((_) async => 'not');
+        when(
+          () => mockDataSource.getLastGateType(),
+        ).thenAnswer((_) async => 'not');
 
         // Act
         final result = await repository.getLastGateType();
@@ -58,24 +61,28 @@ void main() {
         verify(() => mockDataSource.getLastGateType()).called(1);
       });
 
-      test('should return NAND gate type when stored value is "nand"',
-          () async {
-        // Arrange
-        when(() => mockDataSource.getLastGateType())
-            .thenAnswer((_) async => 'nand');
+      test(
+        'should return NAND gate type when stored value is "nand"',
+        () async {
+          // Arrange
+          when(
+            () => mockDataSource.getLastGateType(),
+          ).thenAnswer((_) async => 'nand');
 
-        // Act
-        final result = await repository.getLastGateType();
+          // Act
+          final result = await repository.getLastGateType();
 
-        // Assert
-        expect(result, GateType.nand);
-        verify(() => mockDataSource.getLastGateType()).called(1);
-      });
+          // Assert
+          expect(result, GateType.nand);
+          verify(() => mockDataSource.getLastGateType()).called(1);
+        },
+      );
 
       test('should return NOR gate type when stored value is "nor"', () async {
         // Arrange
-        when(() => mockDataSource.getLastGateType())
-            .thenAnswer((_) async => 'nor');
+        when(
+          () => mockDataSource.getLastGateType(),
+        ).thenAnswer((_) async => 'nor');
 
         // Act
         final result = await repository.getLastGateType();
@@ -87,8 +94,9 @@ void main() {
 
       test('should return XOR gate type when stored value is "xor"', () async {
         // Arrange
-        when(() => mockDataSource.getLastGateType())
-            .thenAnswer((_) async => 'xor');
+        when(
+          () => mockDataSource.getLastGateType(),
+        ).thenAnswer((_) async => 'xor');
 
         // Act
         final result = await repository.getLastGateType();
@@ -98,24 +106,28 @@ void main() {
         verify(() => mockDataSource.getLastGateType()).called(1);
       });
 
-      test('should return XNOR gate type when stored value is "xnor"',
-          () async {
-        // Arrange
-        when(() => mockDataSource.getLastGateType())
-            .thenAnswer((_) async => 'xnor');
+      test(
+        'should return XNOR gate type when stored value is "xnor"',
+        () async {
+          // Arrange
+          when(
+            () => mockDataSource.getLastGateType(),
+          ).thenAnswer((_) async => 'xnor');
 
-        // Act
-        final result = await repository.getLastGateType();
+          // Act
+          final result = await repository.getLastGateType();
 
-        // Assert
-        expect(result, GateType.xnor);
-        verify(() => mockDataSource.getLastGateType()).called(1);
-      });
+          // Assert
+          expect(result, GateType.xnor);
+          verify(() => mockDataSource.getLastGateType()).called(1);
+        },
+      );
 
       test('should return null when no gate type is stored', () async {
         // Arrange
-        when(() => mockDataSource.getLastGateType())
-            .thenAnswer((_) async => null);
+        when(
+          () => mockDataSource.getLastGateType(),
+        ).thenAnswer((_) async => null);
 
         // Act
         final result = await repository.getLastGateType();
@@ -127,8 +139,9 @@ void main() {
 
       test('should return null when stored value is invalid', () async {
         // Arrange
-        when(() => mockDataSource.getLastGateType())
-            .thenAnswer((_) async => 'invalid_gate');
+        when(
+          () => mockDataSource.getLastGateType(),
+        ).thenAnswer((_) async => 'invalid_gate');
 
         // Act
         final result = await repository.getLastGateType();
@@ -142,8 +155,9 @@ void main() {
     group('saveLastGateType', () {
       test('should save AND gate type as "and"', () async {
         // Arrange
-        when(() => mockDataSource.saveLastGateType(any()))
-            .thenAnswer((_) async => {});
+        when(
+          () => mockDataSource.saveLastGateType(any()),
+        ).thenAnswer((_) async => {});
 
         // Act
         await repository.saveLastGateType(GateType.and);
@@ -154,8 +168,9 @@ void main() {
 
       test('should save OR gate type as "or"', () async {
         // Arrange
-        when(() => mockDataSource.saveLastGateType(any()))
-            .thenAnswer((_) async => {});
+        when(
+          () => mockDataSource.saveLastGateType(any()),
+        ).thenAnswer((_) async => {});
 
         // Act
         await repository.saveLastGateType(GateType.or);
@@ -166,8 +181,9 @@ void main() {
 
       test('should save NOT gate type as "not"', () async {
         // Arrange
-        when(() => mockDataSource.saveLastGateType(any()))
-            .thenAnswer((_) async => {});
+        when(
+          () => mockDataSource.saveLastGateType(any()),
+        ).thenAnswer((_) async => {});
 
         // Act
         await repository.saveLastGateType(GateType.not);
@@ -178,8 +194,9 @@ void main() {
 
       test('should save NAND gate type as "nand"', () async {
         // Arrange
-        when(() => mockDataSource.saveLastGateType(any()))
-            .thenAnswer((_) async => {});
+        when(
+          () => mockDataSource.saveLastGateType(any()),
+        ).thenAnswer((_) async => {});
 
         // Act
         await repository.saveLastGateType(GateType.nand);
@@ -190,8 +207,9 @@ void main() {
 
       test('should save NOR gate type as "nor"', () async {
         // Arrange
-        when(() => mockDataSource.saveLastGateType(any()))
-            .thenAnswer((_) async => {});
+        when(
+          () => mockDataSource.saveLastGateType(any()),
+        ).thenAnswer((_) async => {});
 
         // Act
         await repository.saveLastGateType(GateType.nor);
@@ -202,8 +220,9 @@ void main() {
 
       test('should save XOR gate type as "xor"', () async {
         // Arrange
-        when(() => mockDataSource.saveLastGateType(any()))
-            .thenAnswer((_) async => {});
+        when(
+          () => mockDataSource.saveLastGateType(any()),
+        ).thenAnswer((_) async => {});
 
         // Act
         await repository.saveLastGateType(GateType.xor);
@@ -214,8 +233,9 @@ void main() {
 
       test('should save XNOR gate type as "xnor"', () async {
         // Arrange
-        when(() => mockDataSource.saveLastGateType(any()))
-            .thenAnswer((_) async => {});
+        when(
+          () => mockDataSource.saveLastGateType(any()),
+        ).thenAnswer((_) async => {});
 
         // Act
         await repository.saveLastGateType(GateType.xnor);
@@ -254,8 +274,9 @@ void main() {
     group('setDarkMode', () {
       test('should enable dark mode', () async {
         // Arrange
-        when(() => mockDataSource.setDarkMode(any()))
-            .thenAnswer((_) async => {});
+        when(
+          () => mockDataSource.setDarkMode(any()),
+        ).thenAnswer((_) async => {});
 
         // Act
         await repository.setDarkMode(true);
@@ -266,8 +287,9 @@ void main() {
 
       test('should disable dark mode', () async {
         // Arrange
-        when(() => mockDataSource.setDarkMode(any()))
-            .thenAnswer((_) async => {});
+        when(
+          () => mockDataSource.setDarkMode(any()),
+        ).thenAnswer((_) async => {});
 
         // Act
         await repository.setDarkMode(false);

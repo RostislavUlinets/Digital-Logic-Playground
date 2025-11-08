@@ -47,15 +47,17 @@ void main() {
       test('should save gate type string to SharedPreferences', () async {
         // Arrange
         const testGateType = 'or';
-        when(() => mockPrefs.setString(any(), any()))
-            .thenAnswer((_) async => true);
+        when(
+          () => mockPrefs.setString(any(), any()),
+        ).thenAnswer((_) async => true);
 
         // Act
         await dataSource.saveLastGateType(testGateType);
 
         // Assert
-        verify(() => mockPrefs.setString('last_gate_type', testGateType))
-            .called(1);
+        verify(
+          () => mockPrefs.setString('last_gate_type', testGateType),
+        ).called(1);
       });
     });
 
@@ -100,8 +102,9 @@ void main() {
     group('setDarkMode', () {
       test('should save dark mode enabled to SharedPreferences', () async {
         // Arrange
-        when(() => mockPrefs.setBool(any(), any()))
-            .thenAnswer((_) async => true);
+        when(
+          () => mockPrefs.setBool(any(), any()),
+        ).thenAnswer((_) async => true);
 
         // Act
         await dataSource.setDarkMode(true);
@@ -112,8 +115,9 @@ void main() {
 
       test('should save dark mode disabled to SharedPreferences', () async {
         // Arrange
-        when(() => mockPrefs.setBool(any(), any()))
-            .thenAnswer((_) async => true);
+        when(
+          () => mockPrefs.setBool(any(), any()),
+        ).thenAnswer((_) async => true);
 
         // Act
         await dataSource.setDarkMode(false);
