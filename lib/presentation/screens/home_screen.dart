@@ -5,6 +5,7 @@ import '../../domain/entities/gate_type.dart';
 import '../blocs/gate_simulator/gate_simulator_bloc.dart';
 import '../blocs/gate_simulator/gate_simulator_event.dart';
 import '../blocs/gate_simulator/gate_simulator_state.dart';
+import '../widgets/custom_app_bar.dart';
 import '../widgets/gate_bottom_nav_bar.dart';
 import '../widgets/gate_symbol.dart';
 import '../widgets/input_toggle.dart';
@@ -19,16 +20,13 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<GateSimulatorBloc, GateSimulatorState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(state.currentGate.name),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.info_outline),
-                onPressed: () {
-                  _showGateInfo(context, state);
-                },
-              ),
-            ],
+          appBar: CustomAppBar(
+            onGridToggle: () {
+              // TODO: Implement grid view toggle
+            },
+            onThemeToggle: () {
+              // TODO: Implement theme toggle
+            },
           ),
           body: Center(
             child: SingleChildScrollView(
@@ -38,7 +36,9 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   // Gate symbol with fade transition
                   AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 200),
+                    switchInCurve: Curves.easeInOut,
+                    switchOutCurve: Curves.easeInOut,
                     transitionBuilder:
                         (Widget child, Animation<double> animation) {
                           return FadeTransition(
