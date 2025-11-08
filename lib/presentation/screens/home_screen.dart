@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/entities/gate_type.dart';
 import '../blocs/gate_simulator/gate_simulator_bloc.dart';
+import '../blocs/gate_simulator/gate_simulator_event.dart';
 import '../blocs/gate_simulator/gate_simulator_state.dart';
 import '../widgets/gate_bottom_nav_bar.dart';
+import '../widgets/input_toggle.dart';
+import '../widgets/output_indicator.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -25,31 +29,72 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           body: Center(
-            child: Padding(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Gate name and formula
                   Text(
                     state.currentGate.name,
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 8),
                   Text(
                     state.currentGate.formula,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                   ),
+                  const SizedBox(height: 48),
+
+                  // Input toggles
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: InputToggle(
+                          label: 'Input A',
+                          value: state.inputA,
+                          onTap: () {
+                            context
+                                .read<GateSimulatorBloc>()
+                                .add(const ToggleInputA());
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      // Only show Input B for gates that use it (NOT gate uses only A)
+                      if (state.currentGateType != GateType.not)
+                        Expanded(
+                          child: InputToggle(
+                            label: 'Input B',
+                            value: state.inputB,
+                            onTap: () {
+                              context
+                                  .read<GateSimulatorBloc>()
+                                  .add(const ToggleInputB());
+                            },
+                          ),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 48),
+
+                  // Output indicator
+                  OutputIndicator(value: state.output),
                   const SizedBox(height: 32),
-                  Text(
-                    'Placeholder for gate visualization',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Inputs and outputs will be added in Stage 5',
-                    style: Theme.of(context).textTheme.bodyMedium,
+
+                  // Description
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        state.currentGate.description,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                 ],
               ),
