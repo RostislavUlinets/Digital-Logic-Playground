@@ -13,26 +13,10 @@ class GetTruthTable {
   /// Format: [{'A': bool, 'B': bool, 'OUT': bool}, ...]
   List<Map<String, bool>> call(GateType type) {
     return [
-      {
-        'A': false,
-        'B': false,
-        'OUT': _calculateOutput(type, false, false),
-      },
-      {
-        'A': false,
-        'B': true,
-        'OUT': _calculateOutput(type, false, true),
-      },
-      {
-        'A': true,
-        'B': false,
-        'OUT': _calculateOutput(type, true, false),
-      },
-      {
-        'A': true,
-        'B': true,
-        'OUT': _calculateOutput(type, true, true),
-      },
+      {'A': false, 'B': false, 'OUT': _calculateOutput(type, false, false)},
+      {'A': false, 'B': true, 'OUT': _calculateOutput(type, false, true)},
+      {'A': true, 'B': false, 'OUT': _calculateOutput(type, true, false)},
+      {'A': true, 'B': true, 'OUT': _calculateOutput(type, true, true)},
     ];
   }
 }
